@@ -1,0 +1,23 @@
+import hashlib
+
+pass_hash = input('Enter md5 Hash: ')
+word_list = input('Enter word list file name (with .txt): ')
+
+try:
+    pass_file = open(word_list, 'r')
+except:
+    print('no file found')
+    quit()
+
+
+for x in pass_file:
+    enc_word = x.encode('utf-8')
+    digest = hashlib.md5(enc_word.strip()).hexdigest()
+
+    if digest == pass_hash:
+        print('password found '+ str(x))
+        flag = 1
+        break
+
+if flag== 0:
+    print('password is not in the list')
